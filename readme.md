@@ -3,8 +3,8 @@
 The ESP32 SensorNode is a ESP32 based multi-purpose sensor for use in home automation systems.
 It connects via Wi-Fi to your home automation system and allows you to receive the measured parameters such as temperature, humidity, brightness and movement.
 
-![Front](https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front.png?raw=true)
-![Back](https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back.png?raw=true)
+<img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front.png?raw=true" width="250" height="250">
+<img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back.png?raw=true" width="250" height="250">
 
 The board can be programmed by USB and it's compatible with both [ESPHome](https://esphome.io/) for use with [Home Assistant](https://www.home-assistant.io/) and typical Arduino code with [MQTT](https://en.wikipedia.org/wiki/MQTT) messages that should be compatible with a lot of home automation systems.
 
@@ -29,19 +29,21 @@ Due to the high consumption of the ESP32 with Wi-Fi enabled, the board tends to 
 
 The sensor has been isolated as much as possible from the rest of the system but it would be preferable to implement software that can limit consumption in order to obtain precise measurements.
 
-![Front](https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front_thermal.png?raw=true)
-![Back](https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back_thermal.png?raw=true)
+<img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front_thermal.png?raw=true" width="250" height="250">
+<img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back_thermal.png?raw=true" width="250" height="250">
 
 At the time of writing, Esphome allows you to configure wifi power saving but does not yet support light sleep, which would further reduce consumption and consequently unnecessary heat.
 
-For this reason I intend to experiment with deep sleep and the possibility to perform measurements through the [ULP Coprocessor](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp.html) in the ESP32 module and use the main core only when strictly necessary to send data via Wi-Fi.
+For this reason, I'm working on a simple software able to spend most of the time in deep sleep and turn on periodically to check the sensors and use the Wi-Fi only when it's necessary to send new data via MQTT.
+This software is still under development and will be uploaded as soon as it is finished and tested.
+
 
 ## Bill of Materials
 
 |Item|Label                     |Manufacturer Part |Value|Qty|Link                                                                                                                                           |
 |----|--------------------------|------------------|-----|---|-----------------------------------------------------------------------------------------------------------------------------------------------|
-|1   |C1,C2                     |CL10A226MQ8NRNC   |22uF |2  |[LCSC](https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_SAMSUNG_CL10A226MQ8NRNC_22uF-226-20-6-3V_C59461.html)        |
-|2   |C6,C8,C11,C13             |CL10A475KQ8NNND   |4.7uF|4  |[LCSC](https://lcsc.com/product-detail/Others_Samsung-Electro-Mechanics_CL10A475KQ8NNND_Samsung-Electro-Mechanics-CL10A475KQ8NNND_C307470.html)|
+|1   |C1,C2,C6                  |CL10A226MQ8NRNC   |22uF |3  |[LCSC](https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_SAMSUNG_CL10A226MQ8NRNC_22uF-226-20-6-3V_C59461.html)        |
+|2   |C8,C11,C13                |CL10A475KQ8NNND   |4.7uF|3  |[LCSC](https://lcsc.com/product-detail/Others_Samsung-Electro-Mechanics_CL10A475KQ8NNND_Samsung-Electro-Mechanics-CL10A475KQ8NNND_C307470.html)|
 |3   |C3,C4,C5,C7,C9,C10,C12,C14|0603B104K500CT    |100nF|8  |[LCSC](https://lcsc.com/product-detail/Multilayer-Ceramic-Capacitors-MLCC-SMD-SMT_Walsin-Tech-Corp-0603B104K500CT_C314282.html)                |
 |4   |D1                        |BAT760-7          |     |1  |[LCSC](https://lcsc.com/product-detail/Schottky-Barrier-Diodes-SBD_DIODES_BAT760-7_BAT760-7_C124187.html)                                      |
 |5   |D2,D3,D4                  |LESD5D5.0CT1G     |     |3  |[LCSC](https://lcsc.com/product-detail/New-Arrivals_Leshan-Radio-LESD5D5-0CT1G_C383211.html)                                                   |
@@ -63,4 +65,4 @@ For this reason I intend to experiment with deep sleep and the possibility to pe
 
 ## Purchase an assembled unit
 
-Since the production of this board requires relatively advanced soldering techniques and tools, I am considering offering boards already assembled on Tindie. I'll provide a link as soon as I'm ready to do so.
+Since the production of this board requires relatively advanced soldering techniques and tools, I am considering offering boards already assembled on Tindie. I'll provide updates as soon as I'm ready to do so.
