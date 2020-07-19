@@ -6,7 +6,7 @@ It connects via Wi-Fi to your home automation system and allows you to receive t
 <img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front.png?raw=true" width="250" height="250">
 <img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back.png?raw=true" width="250" height="250">
 
-The board can be programmed by USB and it's compatible with both [ESPHome](https://esphome.io/) for use with [Home Assistant](https://www.home-assistant.io/) and typical Arduino code with [MQTT](https://en.wikipedia.org/wiki/MQTT) messages that should be compatible with a lot of home automation systems.
+The board can be programmed over USB and it's compatible with both [ESPHome](https://esphome.io/) for use with [Home Assistant](https://www.home-assistant.io/) and typical Arduino code with [MQTT](https://en.wikipedia.org/wiki/MQTT) messages that should be compatible with a lot of home automation systems.
 
 ## Sensors
 
@@ -36,7 +36,6 @@ At the time of writing, Esphome allows you to configure wifi power saving but do
 
 For this reason, I'm working on a simple software able to spend most of the time in deep sleep and turn on periodically to check the sensors and use the Wi-Fi only when it's necessary to send new data via MQTT.
 This software is still under development and will be uploaded as soon as it is finished and tested.
-
 
 ## Bill of Materials
 
