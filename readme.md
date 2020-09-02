@@ -6,7 +6,7 @@ It connects via Wi-Fi to your home automation system and allows you to receive t
 <img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front.png?raw=true" width="250" height="250">
 <img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back.png?raw=true" width="250" height="250">
 
-The board can be programmed over USB and it's compatible with both [ESPHome](https://esphome.io/) for use with [Home Assistant](https://www.home-assistant.io/) and typical Arduino code with [MQTT](https://en.wikipedia.org/wiki/MQTT) messages that should be compatible with a lot of home automation systems.
+The board can be programmed over USB and it's compatible with both [ESPHome](https://esphome.io/) (please read [below](https://github.com/TheNico14/ESP32-SensorNode#temperature-accuracy)) for use with [Home Assistant](https://www.home-assistant.io/) and typical Arduino code with [MQTT](https://en.wikipedia.org/wiki/MQTT) messages that should be compatible with a lot of home automation systems.
 
 The board dimensions are 5.08 x 4.57 cm (2 x 1.8 inches).
 
@@ -34,36 +34,38 @@ The sensor has been isolated as much as possible from the rest of the system but
 <img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/front_thermal.png?raw=true" width="250" height="250">
 <img src="https://github.com/TheNico14/ESP32-SensorNode/blob/master/Documentation/Images/back_thermal.png?raw=true" width="250" height="250">
 
-At the time of writing, Esphome allows you to configure wifi power saving but does not yet support light sleep, which would further reduce consumption and consequently unnecessary heat.
+At the time of writing, ESPHome allows you to configure wifi power saving but does not yet support light sleep, which would further reduce consumption and consequently unnecessary heat.
 
 For this reason, I'm working on a simple software able to spend most of the time in deep sleep and turn on periodically to check the sensors and use the Wi-Fi only when it's necessary to send new data via MQTT.
 This software is still under development and will be uploaded as soon as it is finished and tested.
 
-## Bill of Materials
+## ESPHome firmware
 
-|Item|Label                     |Manufacturer Part |Value|Qty|
-|----|--------------------------|------------------|-----|---|
-|1   |C1,C2,C6                  |CL10A226MQ8NRNC   |22uF |3  |
-|2   |C11,C13                   |CL10A475KQ8NNND   |4.7uF|2  |
-|3   |C3,C4,C5,C7,C9,C10,C12,C14|0603B104K500CT    |100nF|8  |
-|4   |D1                        |BAT760-7          |     |1  |
-|5   |D2,D3,D4                  |LESD5D5.0CT1G     |     |3  |
-|6   |EN,BOOT                   |K2-1107SP-A3SW-01 |     |2  |
-|7   |LED                       |WS2812B-3535      |     |1  |
-|8   |PIR                       |AS312             |     |1  |
-|9   |Q1,Q2                     |SS8050-G          |     |2  |
-|10  |R1,R4,R5,R6,R11           |0603WAJ0102T5E    |1K   |5  |
-|11  |R2,R3,R7,R8               |0603WAF1002T5E    |10K  |4  |
-|12  |R9,R10,R12                |WR06X472 JTL      |4.7K |3  |
-|13  |STATUS                    |ORH-G36G          |     |1  |
-|14  |U1                        |ESP32-WROOM-32D   |     |1  |
-|15  |U2                        |HT7833            |     |1  |
-|16  |U3                        |CP2102N-A01-GQFN24|     |1  |
-|17  |U4                        |SI7021            |     |1  |
-|19  |U5                        |BH1750FVI-TR      |     |1  |
-|20  |USB                       |U-F-M5WD-W-1      |     |1  |
-|21  |                          |PIR COVER         |     |1  |
+This guide requires ESPHome already installed on your machine, more info on installation [here](https://esphome.io/index.html).
+
+Installation:
+
+* In the ESPHome interface click on the + to add a new device.
+* Choose a name for the device and click on continue.
+* Select Generic ESP32 (WROVER Module) from the list and click continue.
+* Enter your Wi-Fi network details and a password for OTA and API, then click continue.
+* Click on submit.
+* After a refresh of the page, the newly created device should be visible. Click on edit.
+* You can now complete the configuration as shown in the example [here](https://github.com/TheNico14/ESP32-SensorNode/blob/master/Code/ESPHome/ESPHome_config).
+
+Once the configuration is complete, you can upload the firmware onto the board. There are multiple ways to do this:
+
+* Compile and download the firmware by clicking on the 3 dots of the device in ESPHome and selecting compile. You will get a .bin file that can be uploaded via the web interface or via USB.
+* If you connect the board to the PC containing ESPHome you should be able to select the board from the ESPHome web interface and click upload.
+
+## Manual firmware upload
+
+Each board is shipped with a basic version of ESPHome that allows you to load firmware once connected to the hotspot created by the board. Once connected to the ESP32 SensorNode network, you can connect via browser to its web interface on 192.168.4.1 and upload the .bin firmware.
+
+Another possibility is to use the [esphome-flasher](https://github.com/esphome/esphome-flasher/releases) tool to upload the firmware via USB.
 
 ## Purchase an assembled unit
 
-Since the production of this board requires relatively advanced soldering techniques and tools, I am considering offering boards already assembled on Tindie. I'll provide updates as soon as I'm ready to do so.
+Since the production of this board requires relatively advanced soldering techniques and tools, upon request of some interested people, I opened a shop in Tindie where I sell already assembled boards.
+
+[Purchase an ESP32 SensorNode on Tindie](https://www.tindie.com/products/thenico/esp32-sensornode/).

@@ -1,0 +1,80 @@
+esphome:
+  name: sensornode
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  ssid: "" # Wi-Fi ssid
+  password: "" #Wi-Fi password
+  
+  fast_connect: true 
+  power_save_mode: high # Wi-Fi power save, can be disabled if poor signal, board temperature can increase
+  
+  manual_ip: # Network details
+    static_ip: x.x.x.x
+    gateway: x.x.x.x
+    subnet: x.x.x.x
+    
+  ap:
+    ssid: "ESP32 SensorNode" # Fallback hotspot if Wi-Fi not available 
+    ap_timeout: 5min # Fallback timeout
+
+captive_portal:
+
+web_server:
+  port: 80
+
+logger:
+
+api:
+  password: '' # ESPHome API password
+
+ota:
+  password: '' # ESPHome OTA password
+
+i2c:
+  sda: 21
+  scl: 22
+  scan: True
+  
+sensor:
+  - platform: bh1750
+    name: "SensorNode brightness" # Sensor name
+    address: 0x23
+    update_interval: 1s # Sensor update interval
+    filters: # Optional, used to reduce data amount
+    - or:
+      - throttle: 30s # Send after x seconds
+      - delta: 2.0 # Send if changed more than x
+  
+  - platform: htu21d
+    temperature:
+      name: "SensorNode temperature" # Sensor name
+      filters: # Optional, used to reduce data amount
+      - or:
+        - throttle: 30s # Send after x seconds
+        - delta: 0.5 # Send if changed more than x
+    humidity:
+      name: "SensorNode humidity"
+      filters: # Optional, used to reduce data amount
+      - or:
+        - throttle: 30s # Send after x seconds
+        - delta: 2 # Send if changed more than x
+    update_interval: 5s # Sensor update interval
+      
+light:
+  - platform: fastled_clockless
+    chipset: WS2812B
+    pin: 27
+    num_leds: 1
+    rgb_order: GRB
+    name: "SensorNode RGB LED" # LED name
+    
+binary_sensor:
+  - platform: gpio
+    pin: 13
+    name: "SensorNode motion" # Motion sensor name
+    device_class: motion
+    
+status_led: # Onboard status pin, used to signal errors
+  pin: 32
